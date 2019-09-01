@@ -1,0 +1,9 @@
+[build]
+  command = "yarn build --modern"
+  publish = "dist/"
+
+[[redirects]]
+  from = "https://rilis.netlify.com/*"
+  to = "https://rilis.macarie.me/:splat"
+  status = 301
+  force = true
