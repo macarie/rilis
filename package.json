@@ -1,5 +1,6 @@
 {
   "name": "rilis",
+  "description": "Discover the latest releases on Spotify from your favourite artists",
   "version": "0.1.0",
   "private": true,
   "scripts": {
