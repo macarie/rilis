@@ -10,6 +10,7 @@
 > Discover the latest releases on Spotify from your favourite artists
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/70ea6aff-2810-4cc3-89c2-9c8a909be50a/deploy-status)](https://app.netlify.com/sites/rilis/deploys)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmacarie%2Frilis.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmacarie%2Frilis?ref=badge_shield)
 
 [Rilis](https://rilis.macarie.me/) is a web application built with [Vue.js](https://vuejs.org/) on top of Spotify's web API.
 
@@ -54,3 +55,7 @@ $ yarn build --modern
 ```
 
 **Note:** the Client ID in `.env`, used for production builds, only allows redirects to `rilis.macarie.me`
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmacarie%2Frilis.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmacarie%2Frilis?ref=badge_large)
