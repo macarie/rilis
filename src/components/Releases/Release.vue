@@ -13,7 +13,7 @@
         <a
           :href="release.link[userOptions.linkType]"
           :title="`${release.name}`"
-          target="_blank"
+          :target="`_${userOptions.linkType === 'href' ? 'blank' : 'self'}`"
         >
           {{ release.name }}
         </a>
