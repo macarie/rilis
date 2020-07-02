@@ -4,7 +4,7 @@
       :href="release.link[userOptions.linkType]"
       class="cover"
       :style="`--background-image: url(${release.cover})`"
-      target="_blank"
+      :target="`_${userOptions.linkType === 'href' ? 'blank' : 'self'}`"
     >
       <img :src="release.cover" :alt="`Cover image for ${release.name}`" />
     </a>
@@ -23,7 +23,7 @@
           <a
             :href="artist.link[userOptions.linkType]"
             :title="artist.name"
-            target="_blank"
+            :target="`_${userOptions.linkType === 'href' ? 'blank' : 'self'}`"
             >{{ artist.name }}</a
           >
         </span>
