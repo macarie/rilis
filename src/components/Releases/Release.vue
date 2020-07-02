@@ -54,20 +54,20 @@ export default {
   props: {
     release: {
       type: Object,
-      default: () => null
+      default: () => null,
     },
     id: {
       type: String,
-      default: () => null
+      default: () => null,
     },
     userOptions: {
       type: Object,
-      default: () => null
-    }
+      default: () => null,
+    },
   },
   methods: {
-    moment
-  }
+    moment,
+  },
 }
 </script>
 

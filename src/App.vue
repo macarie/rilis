@@ -46,30 +46,30 @@ export default {
     Welcome,
     Loading,
     Releases,
-    Footers
+    Footers,
   },
   data: () => {
     return {
       env: {
         clientID: process.env.VUE_APP_CLIENT_ID,
-        redirectURI: process.env.VUE_APP_URL
+        redirectURI: process.env.VUE_APP_URL,
       },
       socials: [
         { name: 'github', link: 'https://github.com/macarie', color: '#333' },
         { name: 'send', link: 'https://t.me/macarie', color: '#0088cc' },
-        { name: 'at-sign', link: 'mailto:raul@macarie.me', color: '#ea4335' }
-      ]
+        { name: 'at-sign', link: 'mailto:raul@macarie.me', color: '#ea4335' },
+      ],
     }
   },
   computed: {
     ...mapState({
-      loading: state => state.data.loading,
-      hasToken: state => Boolean(state.token),
-      user: state => state.data.user,
-      releases: state => [...state.data.releases],
-      userOptions: state => state.options.user
-    })
-  }
+      loading: (state) => state.data.loading,
+      hasToken: (state) => Boolean(state.token),
+      user: (state) => state.data.user,
+      releases: (state) => [...state.data.releases],
+      userOptions: (state) => state.options.user,
+    }),
+  },
 }
 </script>
 

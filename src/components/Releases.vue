@@ -6,12 +6,12 @@
       </div>
     </header>
     <transition-group
-      :enter-active-class="
-        `animated ${lastPage < page ? 'slideRightFadeIn' : 'slideLeftFadeIn'}`
-      "
-      :leave-active-class="
-        `animated ${lastPage < page ? 'slideLeftFadeOut' : 'slideRightFadeOut'}`
-      "
+      :enter-active-class="`animated ${
+        lastPage < page ? 'slideRightFadeIn' : 'slideLeftFadeIn'
+      }`"
+      :leave-active-class="`animated ${
+        lastPage < page ? 'slideLeftFadeOut' : 'slideRightFadeOut'
+      }`"
       tag="div"
       class="container"
     >
@@ -29,7 +29,7 @@
           :linkType="userOptions.linkType"
           :linkTypes="[
             { type: 'uri', friendly: 'App' },
-            { type: 'http', friendly: 'Website' }
+            { type: 'http', friendly: 'Website' },
           ]"
           v-on:changeType="$store.commit('setLinkType', $event)"
         ></open-in>
@@ -38,8 +38,8 @@
             items: {
               total: releases.length,
               perPage: 40,
-              page: page
-            }
+              page: page,
+            },
           }"
           :lastPage="lastPage"
           v-on:changePage="changePage"
@@ -61,35 +61,35 @@ export default {
     Guacamole,
     OpenIn,
     Pages,
-    Release
+    Release,
   },
   props: {
     releases: {
       type: Array,
-      default: () => null
+      default: () => null,
     },
     userOptions: {
       type: Object,
-      default: () => null
-    }
+      default: () => null,
+    },
   },
   data: () => {
     return {
       page: 0,
-      lastPage: 0
+      lastPage: 0,
     }
   },
   computed: {
     slicedReleases() {
       return this.releases.slice(40 * this.page, 40 * (this.page + 1))
-    }
+    },
   },
   methods: {
     changePage(newPage) {
       this.lastPage = this.page
       this.page = newPage
-    }
-  }
+    },
+  },
 }
 </script>
 

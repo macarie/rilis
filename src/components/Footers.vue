@@ -38,9 +38,9 @@ export default {
   props: {
     socials: {
       type: Array,
-      default: null
-    }
-  }
+      default: null,
+    },
+  },
 }
 </script>
 

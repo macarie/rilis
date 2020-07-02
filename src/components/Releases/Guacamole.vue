@@ -11,8 +11,8 @@ export default {
   props: {
     numberOfReleases: {
       type: Number,
-      default: () => 0
-    }
+      default: () => 0,
+    },
   },
   methods: {
     humanizeNumber(n = 0) {
@@ -31,8 +31,8 @@ export default {
       } while (y >= 1000 && i <= 12)
 
       return `${y} ${words[i / 3 - 1]}`
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -7,9 +7,7 @@
         <a href="https://spotify.com" target="_blank">Spotify</a>.
       </p>
       <a
-        :href="
-          `https://accounts.spotify.com/authorize?client_id=${env.clientID}&response_type=token&redirect_uri=${env.redirectURI}&scope=user-follow-read&show_dialog=false`
-        "
+        :href="`https://accounts.spotify.com/authorize?client_id=${env.clientID}&response_type=token&redirect_uri=${env.redirectURI}&scope=user-follow-read&show_dialog=false`"
         class="sign-in"
       >
         Sign in with
@@ -27,9 +25,9 @@ export default {
       type: Object,
       default: () => {
         return {}
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 

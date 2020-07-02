@@ -10,7 +10,7 @@
       :key="page"
       :class="{
         page: true,
-        'out-of-bounds': page === 0 || page > numberOfPages
+        'out-of-bounds': page === 0 || page > numberOfPages,
       }"
       @click="setPage(page)"
     >
@@ -40,16 +40,16 @@ export default {
   props: {
     options: {
       type: Object,
-      default: () => null
+      default: () => null,
     },
     lastPage: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
-      page: this.options.items.page + 1
+      page: this.options.items.page + 1,
     }
   },
   computed: {
@@ -60,7 +60,7 @@ export default {
       return Array(3)
         .fill()
         .map((item, index) => index + this.page - 1)
-    }
+    },
   },
   methods: {
     setPage(clickedPage) {
@@ -74,8 +74,8 @@ export default {
       }
 
       return false
-    }
-  }
+    },
+  },
 }
 </script>
 

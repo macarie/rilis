@@ -14,22 +14,22 @@ const state = {
     loading: {
       user: null,
       artists: null,
-      releases: null
+      releases: null,
     },
     user: null,
     artists: [],
-    releases: new Map()
+    releases: new Map(),
   },
   options: {
     ky: {
       headers: {},
       retry: 3,
-      baseURL: 'https://api.spotify.com/v1'
+      baseURL: 'https://api.spotify.com/v1',
     },
     user: {
-      linkType: null
-    }
-  }
+      linkType: null,
+    },
+  },
 }
 
 const mutations = {
@@ -51,7 +51,7 @@ const mutations = {
 
   setLinkType(state, linkType) {
     cookies[options] = {
-      expires: 315360000
+      expires: 315360000,
     }
 
     cookies.linkType = linkType
@@ -81,7 +81,7 @@ const mutations = {
         return datesCompare
       })
     )
-  }
+  },
 }
 
 const actions = {
@@ -104,14 +104,16 @@ const actions = {
   },
 
   async makeRequests({ dispatch }, { links, mapper }) {
-    const nextLinks = (await pMap(links, mapper, {
-      concurrency: 5
-    })).filter(link => !!link)
+    const nextLinks = (
+      await pMap(links, mapper, {
+        concurrency: 5,
+      })
+    ).filter((link) => !!link)
 
     if (nextLinks.length > 0) {
       return dispatch('makeRequests', {
         links: nextLinks,
-        mapper
+        mapper,
       })
     }
   },
@@ -119,64 +121,64 @@ const actions = {
   async fetchUser({ dispatch, state }) {
     await dispatch('makeRequests', {
       links: [`${state.options.ky.baseURL}/me`],
-      mapper: link =>
+      mapper: (link) =>
         dispatch('fetchLink', {
           link,
           mutation: 'setUser',
-          createData: api => {
+          createData: (api) => {
             return {
               id: api.id,
               name: api.display_name,
               link: {
                 uri: api.uri,
-                http: api.external_urls.spotify
+                http: api.external_urls.spotify,
               },
               image:
                 api.images.length > 0
                   ? api.images[0].url
-                  : `https://ui-avatars.com/api/?name=${api.display_name}&size=512`
+                  : `https://ui-avatars.com/api/?name=${api.display_name}&size=512`,
             }
           },
           hasNext: () => false,
-          nextLink: () => null
-        })
+          nextLink: () => null,
+        }),
     })
   },
 
   async fetchFollowedArtists({ dispatch, state }) {
     await dispatch('makeRequests', {
       links: [`${state.options.ky.baseURL}/me/following?type=artist&limit=50`],
-      mapper: link =>
+      mapper: (link) =>
         dispatch('fetchLink', {
           link,
           mutation: 'addArtists',
-          createData: api =>
-            api.artists.items.map(followedArtist => [
+          createData: (api) =>
+            api.artists.items.map((followedArtist) => [
               followedArtist.id,
               {
                 name: followedArtist.name,
                 image:
                   followedArtist.images.length > 0
                     ? followedArtist.images[0].url
-                    : `https://ui-avatars.com/api/?name=${followedArtist.name}&size=512`
-              }
+                    : `https://ui-avatars.com/api/?name=${followedArtist.name}&size=512`,
+              },
             ]),
-          hasNext: api => Boolean(api.artists.next),
-          nextLink: api => api.artists.next
-        })
+          hasNext: (api) => Boolean(api.artists.next),
+          nextLink: (api) => api.artists.next,
+        }),
     })
   },
 
   async fetchReleases({ dispatch }, { links }) {
     await dispatch('makeRequests', {
       links,
-      mapper: link =>
+      mapper: (link) =>
         dispatch('fetchLink', {
           link,
           mutation: 'addReleases',
-          createData: api =>
+          createData: (api) =>
             api.items
-              .map(release => {
+              .map((release) => {
                 if (
                   release.album_type === 'compilation' ||
                   release.artists[0].id === '0LyfQWJT6nXafLPZqxe9Of'
@@ -190,32 +192,32 @@ const actions = {
                     name: release.name,
                     link: {
                       uri: release.uri,
-                      http: release.external_urls.spotify
+                      http: release.external_urls.spotify,
                     },
                     cover: release.images[0].url,
                     date: release.release_date,
                     type: release.album_type,
                     group: release.album_group,
-                    artists: release.artists.map(artist => ({
+                    artists: release.artists.map((artist) => ({
                       id: artist.id,
                       name: artist.name,
                       link: {
                         uri: artist.uri,
-                        http: artist.external_urls.spotify
-                      }
-                    }))
-                  }
+                        http: artist.external_urls.spotify,
+                      },
+                    })),
+                  },
                 ]
               })
               .filter(Boolean),
-          hasNext: api => Boolean(api.next),
-          nextLink: api => api.next
-        })
+          hasNext: (api) => Boolean(api.next),
+          nextLink: (api) => api.next,
+        }),
     })
   },
 
   async fetchData({ commit, dispatch, state }) {
-    ;['user', 'artists', 'releases'].forEach(element =>
+    ;['user', 'artists', 'releases'].forEach((element) =>
       commit('setLoading', { element, value: true })
     )
 
@@ -226,20 +228,18 @@ const actions = {
     commit('setLoading', { element: 'artists', value: false })
 
     const links = [...state.data.artists].map(
-      followedArtist =>
-        `${state.options.ky.baseURL}/artists/${
-          followedArtist[0]
-        }/albums?include_groups=album,single,appears_on&country=from_token&limit=50`
+      (followedArtist) =>
+        `${state.options.ky.baseURL}/artists/${followedArtist[0]}/albums?include_groups=album,single,appears_on&country=from_token&limit=50`
     )
 
     await dispatch('fetchReleases', { links })
     commit('sortReleases')
     commit('setLoading', { element: 'releases', value: false })
-  }
+  },
 }
 
 export default new Vuex.Store({
   state,
   mutations,
-  actions
+  actions,
 })

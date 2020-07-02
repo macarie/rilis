@@ -16,7 +16,7 @@ if (hash) {
 
   if (token.length > 0 && expires.length > 0) {
     cookies[options] = {
-      expires: expires[1]
+      expires: expires[1],
     }
 
     cookies.token = token[1]
@@ -37,7 +37,7 @@ if (store.state.token) {
 
 new Vue({
   store,
-  render: function(h) {
+  render: function (h) {
     return h(App)
-  }
+  },
 }).$mount('#app')

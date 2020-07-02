@@ -13,7 +13,7 @@
           {{ user.name || user.id }}
           <img :src="user.image" />
         </a>
-        <div style="width: 2.625rem; height: 2.625rem" v-else></div>
+        <div style="width: 2.625rem; height: 2.625rem;" v-else></div>
       </transition>
     </div>
   </nav>
@@ -25,21 +25,21 @@ export default {
   props: {
     hasToken: {
       type: Boolean,
-      default: () => null
+      default: () => null,
     },
     user: {
       type: Object,
-      default: () => null
+      default: () => null,
     },
     userOptions: {
       type: Object,
-      default: () => null
+      default: () => null,
     },
     isLoading: {
       type: Boolean,
-      default: () => null
-    }
-  }
+      default: () => null,
+    },
+  },
 }
 </script>
 

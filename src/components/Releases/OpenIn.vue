@@ -18,12 +18,12 @@ export default {
   props: {
     linkType: {
       type: String,
-      default: null
+      default: null,
     },
     linkTypes: {
       type: Array,
-      default: null
-    }
+      default: null,
+    },
   },
   methods: {
     use(type) {
@@ -41,11 +41,11 @@ export default {
         'style',
         `--active-offset: ${offsetLeft}px; --active-width: ${offsetWidth - 4}px`
       )
-    }
+    },
   },
   mounted() {
     this.setActive(this.linkType)
-  }
+  },
 }
 </script>
 
