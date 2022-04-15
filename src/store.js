@@ -23,7 +23,10 @@ const state = {
   options: {
     ky: {
       headers: {},
-      retry: 3,
+      retry: {
+        limit: 5,
+        statusCodes: [404, 429],
+      },
       baseURL: 'https://api.spotify.com/v1',
     },
     user: {
